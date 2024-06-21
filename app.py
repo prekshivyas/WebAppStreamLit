@@ -12,7 +12,7 @@ class SessionState:
 
 # Google Drive API credentials setup
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
-SERVICE_ACCOUNT_FILE = 'D:\streamlit\WebAppStreamLit\cred\dynamic-poet-427110-n5-e4bd45401364.json'  # Update with your credentials file path
+SERVICE_ACCOUNT_FILE = '.\cred\credentials.json'  # Update with your credentials file path
 
 # Authenticate and create a Google Drive API service
 credentials = service_account.Credentials.from_service_account_file(
