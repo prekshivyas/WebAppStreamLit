@@ -1,6 +1,5 @@
 import streamlit as st
 import io
-import os
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from PIL import Image
@@ -11,20 +10,51 @@ from firebase_admin import db
 # Set page configuration
 st.set_page_config(layout="wide")
 
+
+firebase_credentials = {
+    "type": st.secrets["FIREBASE_TYPE"],
+    "project_id": st.secrets["FIREBASE_PROJECT_ID"],
+    "private_key_id": st.secrets["FIREBASE_PRIVATE_KEY_ID"],
+    "private_key": st.secrets["FIREBASE_PRIVATE_KEY"],
+    "client_email": st.secrets["FIREBASE_CLIENT_EMAIL"],
+    "client_id": st.secrets["FIREBASE_CLIENT_ID"],
+    "auth_uri": st.secrets["FIREBASE_AUTH_URI"],
+    "token_uri": st.secrets["FIREBASE_TOKEN_URI"],
+    "auth_provider_x509_cert_url": st.secrets["FIREBASE_AUTH_PROVIDER_X509_CERT_URL"],
+    "client_x509_cert_url": st.secrets["FIREBASE_CLIENT_X509_CERT_URL"],
+    "universe_domain": st.secrets["FIREBASE_UNIVERSE_DOMAIN"]
+}
+
+
+google_credentials = {
+    "type": st.secrets["GOOGLE_TYPE"],
+    "project_id": st.secrets["GOOGLE_PROJECT_ID"],
+    "private_key_id": st.secrets["GOOGLE_PRIVATE_KEY_ID"],
+    "private_key": st.secrets["GOOGLE_PRIVATE_KEY"],
+    "client_email": st.secrets["GOOGLE_CLIENT_EMAIL"],
+    "client_id": st.secrets["GOOGLE_CLIENT_ID"],
+    "auth_uri": st.secrets["GOOGLE_AUTH_URI"],
+    "token_uri": st.secrets["GOOGLE_TOKEN_URI"],
+    "auth_provider_x509_cert_url": st.secrets["GOOGLE_AUTH_PROVIDER_X509_CERT_URL"],
+    "client_x509_cert_url": st.secrets["GOOGLE_CLIENT_X509_CERT_URL"],
+    "universe_domain": st.secrets["GOOGLE_UNIVERSE_DOMAIN"]
+}
+
+
+dbURL = st.secrets["DB_URL"]
+
 # Firebase initialization
 if not firebase_admin._apps:
-    cred = credentials.Certificate(os.getenv("FIREBASE_CREDENTIALS"))
+    cred = credentials.Certificate(firebase_credentials)
     firebase_admin.initialize_app(cred, {
-        'databaseURL': os.getenv("DATABASE_URL")
+        'databaseURL': dbURL
     })
 
 # Google Drive API credentials setup
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
-SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_CREDENTIALS")
 
-# Authenticate and create a Google Drive API service
-credentials = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+credentials = service_account.Credentials.from_service_account_info(
+    google_credentials, scopes=SCOPES)
 drive_service = build('drive', 'v3', credentials=credentials)
 
 # Initialize SessionState
