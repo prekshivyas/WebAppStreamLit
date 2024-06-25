@@ -190,7 +190,7 @@ def check_all_categories_submitted():
 
 # Main UI layout
 st.title("MultiChart QA Generation")
-st.markdown("Instructions and Examples: [Click here](https://google.com)")
+st.markdown("Instructions and Examples: [Click here](https://humdrum-bottom-a65.notion.site/Multichart-Type-3-Annotation-Guidelines-5be50e09076a440282f90bfdd5d6830e)")
 
 # Sidebar for Category Selection and QA Pair Management
 with st.sidebar:
