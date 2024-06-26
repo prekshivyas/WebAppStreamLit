@@ -189,8 +189,29 @@ def check_all_categories_submitted():
     st.session_state.all_categories_submitted = st.session_state.categories_submitted == required_categories
 
 # Main UI layout
-st.title("MultiChart QA Generation")
-st.markdown("Instructions and Examples: [Click here](https://humdrum-bottom-a65.notion.site/Multichart-Type-3-Annotation-Guidelines-5be50e09076a440282f90bfdd5d6830e)")
+st.title("📊 ✒️ MultiChart QA Generation")
+# Instructions with link
+st.markdown("""
+<div style="font-size: 20px; color: white;">
+Instructions and Examples: 
+<a href="https://www.notion.so/Multichart-Type-3-Annotation-Guidelines-5be50e09076a440282f90bfdd5d6830e" style="color: blue;">here</a>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    <div style="font-family: 'Cabin', sans-serif; font-size: 20px; color: red;">
+        IMPORTANT!
+    </div>
+    <div style="font-family: 'Cabin', sans-serif; font-size: 20px; color: white;">
+        Please read the instructions and examples carefully.
+        <br>
+        Complete the submission for one question fully, ensuring all categories are addressed.
+        Do not move to the next category until the current one is fully completed.
+        <br>
+    </div>
+""", unsafe_allow_html=True)
+
 
 # Sidebar for Category Selection and QA Pair Management
 with st.sidebar:
@@ -242,6 +263,7 @@ with st.sidebar:
         else:
             st.warning("Please ensure all categories have at least one QA pair added before submitting.")
 
+st.markdown("<br>", unsafe_allow_html=True)
 # Display images based on input ID
 chart_id = st.text_input("Enter Chart ID (0 to 100)", st.session_state.chart_id)
 if st.button("Display"):
