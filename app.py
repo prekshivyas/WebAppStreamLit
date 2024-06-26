@@ -206,8 +206,8 @@ st.markdown("""
     <div style="font-family: 'Cabin', sans-serif; font-size: 20px; color: white;">
         Please read the instructions and examples carefully.
         <br>
-        Complete the submission for one question fully, ensuring all categories are addressed.
-        Do not move to the next category until the current one is fully completed.
+        Complete the submission for one chart fully, ensuring all categories are addressed.
+        Do not move to the next category or next chart until the current one is fully completed.
         <br>
     </div>
 """, unsafe_allow_html=True)
